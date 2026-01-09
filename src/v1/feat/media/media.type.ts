@@ -44,7 +44,7 @@ export interface IMedia {
   _id?: string;
   fileName: string; // Generated unique filename
   url: string;
-  thumbnail: MediaThumbnail;
+  thumbnail?: MediaThumbnail;
   type: MediaType;
   metadata: MediaMetadata;
 

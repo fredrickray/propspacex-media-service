@@ -4,9 +4,9 @@ import { MediaType, EntityType, StorageProvider } from "./media.type";
 
 const mediaThumbnailSchema = new Schema(
   {
-    url: { type: String, required: true },
-    width: { type: Number, required: true },
-    height: { type: Number, required: true },
+    url: { type: String, required: false },
+    width: { type: Number, required: false },
+    height: { type: Number, required: false },
   },
   { _id: false }
 );
@@ -45,7 +45,7 @@ const mediaSchema = new Schema<IMediaDocument>(
     },
     thumbnail: {
       type: mediaThumbnailSchema,
-      required: true,
+      required: false,
     },
 
     // File metadata
