@@ -3,6 +3,6 @@ import mediaRoutes from "@media/media.route";
 
 const router = Router();
 
-router.use("/media", mediaRoutes);
+router.use("/", mediaRoutes);
 
 export default router;

@@ -98,12 +98,14 @@ export class MediaService {
       );
 
       // Get thumbnail dimensions
-      const thumbMeta = await getImageMetadata(thumbBuffer);
-      thumbnail = {
-        url: thumbResult.url,
-        width: thumbMeta.width || 200,
-        height: thumbMeta.height || 200,
-      };
+      if (mediaType === MediaType.IMAGE) {
+        const thumbMeta = await getImageMetadata(thumbBuffer);
+        thumbnail = {
+          url: thumbResult.url,
+          width: thumbMeta.width || 200,
+          height: thumbMeta.height || 200,
+        };
+      }
     }
 
     // Upload main file
