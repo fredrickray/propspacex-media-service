@@ -4,8 +4,9 @@ import helmet from "helmet";
 import path from "path";
 import http from "http";
 import * as grpc from "@grpc/grpc-js";
+import { ReflectionService } from "@grpc/reflection";
 import config from "@config/dotenv.config";
-import { MediaService } from "./grpc/index";
+import { MediaService, mediaPackageDefinition } from "./grpc/index";
 import { mediaGrpcService } from "./grpc/servers/media.server";
 import v1Routes from "./v1/route/index";
 import {
@@ -56,6 +57,7 @@ export default class Server {
 
   private setupGrpcServices(): void {
     this.grpcServer.addService(MediaService.service, mediaGrpcService);
+    new ReflectionService(mediaPackageDefinition).addToServer(this.grpcServer);
   }
 
   private setupErrorHandling(): void {
