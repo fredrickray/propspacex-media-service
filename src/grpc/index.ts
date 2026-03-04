@@ -5,7 +5,7 @@ import { join } from "path";
 // Use process.cwd() to construct path - works in both dev and production
 const PROTO_PATH = join(process.cwd(), "src/grpc/proto/media.proto");
 
-const packageDefinition = protoLoader.loadSync(PROTO_PATH, {
+export const mediaPackageDefinition = protoLoader.loadSync(PROTO_PATH, {
   keepCase: false,
   longs: String,
   enums: String,
@@ -20,7 +20,7 @@ interface MediaProtoDefinition {
 }
 
 export const mediaProto = grpc.loadPackageDefinition(
-  packageDefinition
+  mediaPackageDefinition
 ) as unknown as MediaProtoDefinition;
 export const MediaService = mediaProto.media.MediaService;
 
