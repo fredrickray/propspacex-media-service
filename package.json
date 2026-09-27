@@ -6,10 +6,10 @@
   "scripts": {
     "clean": "rm -rf dist",
     "type-check": "tsc --noEmit",
-    "build:only": "tsc && tsc-alias",
+    "build:only": "./node_modules/.bin/tsc && ./node_modules/.bin/tsc-alias",
     "copy:protos": "mkdir -p dist/grpc && cp -R src/grpc/proto dist/grpc/proto",
-    "build": "npm run clean && npm run build:only && npm run copy:protos",
-    "prestart": "npm run build",
+    "build": "node -e \"const fs=require('fs');const start=Date.now();while(!fs.existsSync('node_modules/typescript/bin/tsc')||!fs.existsSync('node_modules/.bin/tsc-alias')){if(Date.now()-start>180000){console.error('Timed out waiting for local TypeScript. On Render, set the build command to: npm install && npm run build');process.exit(1)}Atomics.wait(new Int32Array(new SharedArrayBuffer(4)),0,0,1000)}\" && npm run clean && npm run build:only && npm run copy:protos",
+    "prestart": "node -e \"if(!require('fs').existsSync('dist/index.js'))process.exit(1)\" || npm run build",
     "start": "node dist/index.js",
     "dev": "tsx watch src/index.ts",
     "lint": "eslint src/",
